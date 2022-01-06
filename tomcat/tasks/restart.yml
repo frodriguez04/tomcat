@@ -1,7 +1,0 @@
----
-
-- debug:
-    msg: "Trigger Tomcat Restart"
-  changed_when: true
-  notify:
-    - Restart Tomcat
