@@ -1,0 +1,23 @@
+---
+# handlers file for tomcat
+
+- name: Tomcat - Reload systemd configs and restart
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    name: tomcat
+    enabled: yes
+  listen: Restart Tomcat
+
+- name: Tomcat - Wait for start
+  wait_for:
+    port: "{{ tcat_port }}"
+    host: localhost
+    timeout: 300
+  listen: Restart Tomcat
+
+- name: Tomcat - Verify app server is running and app is available
+  uri:
+    url: http://localhost:{{ tcat_port }}/{{ tcat_app_url }}
+    status_code: "{{ tcat_app_status_code }}"
+  listen: Restart Tomcat

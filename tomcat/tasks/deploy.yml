@@ -1,0 +1,8 @@
+---
+
+- name: Tomcat - Download WAR file
+  get_url:
+    url: "{{ tcat_deployment_url }}"
+    dest: "{{ tcat_webapps_dir }}"
+    owner: "{{ tcat_user }}"
+    group: "{{ tcat_group }}"
