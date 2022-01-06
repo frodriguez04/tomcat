@@ -12,7 +12,7 @@ tcat_bin_dir: "{{ tcat_install_dir }}/bin"
 tcat_native_7: https://download-ib01.fedoraproject.org/pub/epel/7/x86_64/Packages/t/tomcat-native-1.2.23-1.el7.x86_64.rpm
 tcat_native_8: https://download-ib01.fedoraproject.org/pub/epel/8/Everything/x86_64/Packages/t/tomcat-native-1.2.23-1.el8.x86_64.rpm
 tcat_native_rpm: "{{ tcat_native_7 if ansible_distribution_major_version == '7' else tcat_native_8 }}"
-tcat_native_9: http://100.114.134.121/software/apache_tomcat/linux/apache-tomcat-9.0.43.tar.gz
+tcat_native_9: http://YourOwnRepo/software/apache_tomcat/linux/apache-tomcat-9.0.43.tar.gz
 
 #tcat_server_info: "XXXXX" #TODO: Find out what this should be set to
 
