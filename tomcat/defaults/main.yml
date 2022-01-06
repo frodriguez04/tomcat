@@ -1,0 +1,48 @@
+---
+tcat_package_name: apache-tomcat
+tcat_package_name_underscore: apache_tomcat
+tcat_current_version: 9.0.43
+tcat_installer_filename: "{{ tcat_package_name }}-{{ tcat_current_version }}.tar.gz"
+tcat_source_path: "{{ tcat_package_name_underscore }}/linux"
+tcat_source_url: "{{ software_repo_url }}/{{ tcat_source_path }}/{{ tcat_installer_filename }}"
+tcat_dest_dir: "/opt/www/appserver"
+tcat_install_dir: "{{ tcat_dest_dir }}/{{ tcat_package_name }}-{{ tcat_current_version }}"
+tcat_webapps_dir: "{{ tcat_install_dir }}/webapps"
+tcat_bin_dir: "{{ tcat_install_dir }}/bin"
+tcat_native_7: https://download-ib01.fedoraproject.org/pub/epel/7/x86_64/Packages/t/tomcat-native-1.2.23-1.el7.x86_64.rpm
+tcat_native_8: https://download-ib01.fedoraproject.org/pub/epel/8/Everything/x86_64/Packages/t/tomcat-native-1.2.23-1.el8.x86_64.rpm
+tcat_native_rpm: "{{ tcat_native_7 if ansible_distribution_major_version == '7' else tcat_native_8 }}"
+tcat_native_9: http://YourOwnRepo/software/apache_tomcat/linux/apache-tomcat-9.0.43.tar.gz
+
+#tcat_server_info: "XXXXX" #TODO: Find out what this should be set to
+
+# The URL to check if 'tomcat is up'
+# This is the context plus path to a page that will return a known HTTP status code
+# The default checks for a page that doesn't exist and expects a 404
+tcat_app_url: /my-test-ansible-url-that-is-fake
+tcat_app_status_code: "404"
+
+tcat_user: tomcat
+tcat_group: tomcat
+tcat_login_shell: "{{ '/usr/sbin/nologin' if ansible_distribution == 'Ubuntu' else '/sbin/nologin' }}"
+
+tcat_install: true
+tcat_deploy: false
+tcat_restart: false
+
+tcat_native_pkg: tomcat-native.x86_64
+
+tcat_packages:
+  - apr
+  - openssl
+  - tar
+  - java-1.8.0-openjdk-devel
+
+tcat_catalina_opts: -Xms512m -Xmx1024m -XX:+UseParallelGC -Djava.library.path=/usr/lib64/
+tcat_java_opts: -Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom
+
+tcat_port: 8080
+
+# Max Days to keep log files
+tcat_catalina_maxdays: 30
+tcat_localhost_maxdays: 30
